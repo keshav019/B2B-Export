@@ -1,0 +1,24 @@
+version: '3'
+services:
+  web:
+    image: keshav019/b2b_export
+    container_name: b2b-web
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: mongodb://mongo:27017/ecommerce
+      JWT_SECRET: WFFWf15115U842UGUBWF81EE858UYBY51BGBJ5E51Q
+      JWT_EXPIRE: 7d
+      NODE_ENV: production
+
+  mongo:
+    image: mongo:latest
+    container_name: b2b-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+    environment:
+      MONGO_DB: ecommerce
